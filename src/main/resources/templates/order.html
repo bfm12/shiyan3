@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>排序</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <script type = "text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type = "text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <style>
+
+        .container{
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<ul class="nav nav-pills nav-justified">
+    <li role="presentation"><a th:href="@{/database}">数据库存储</a></li>
+    <li role="presentation"><a th:href="@{/scatter}">绘制散点图</a></li>
+    <li role="presentation" class="active"><a th:href="@{/order}">数据排序</a></li>
+    <li role="presentation"><a th:href="@{/answer}">算法求解</a></li>
+</ul>
+<div class="container">
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <form th:action="@{/order/query}" method="post">
+                <div class="form-group">
+                    <label>输入文件名：</label>
+                    <input type="text" name="fileName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>输入组数：</label>
+                    <input type="text" name="group" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="提交" class="btn btn-info">
+                </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <tr>
+                    <th>序号</th>
+                    <th>项集</th>
+                    <th>最后一项的价值：重量比</th>
+                </tr>
+                <tr th:each="order,userStat : ${data}">
+                    <td th:text="${userStat.index+1}"></td>
+                    <td>
+                        <span th:each="it:${order.item}">
+                           [<span th:text="${it.profit}"></span>,<span th:text="${it.weight}"></span>]
+                        </span>
+                    </td>
+                    <td th:text="${order.rate}"></td>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

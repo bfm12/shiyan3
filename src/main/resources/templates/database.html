@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库存储</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <script type = "text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type = "text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+
+        .container{
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<ul class="nav nav-pills nav-justified">
+    <li role="presentation" class="active"><a th:href="@{/database}">数据库存储</a></li>
+    <li role="presentation"><a th:href="@{/scatter}">绘制散点图</a></li>
+    <li role="presentation"><a th:href="@{/order}">数据排序</a></li>
+    <li role="presentation"><a th:href="@{/answer}">算法求解</a></li>
+</ul>
+<div class="container">
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h2>在一切工作开始之前，请先将数据存储到数据库哦！</h2>
+        </div>
+        <div class="panel-body">
+            <a class="btn btn-danger" th:href="@{/save/data/database}">点击存储</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

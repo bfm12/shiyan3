@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>散点图</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <script type = "text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type = "text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.6.0/echarts.min.js"></script>
+
+    <style>
+
+        .container{
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<ul class="nav nav-pills nav-justified">
+    <li role="presentation"><a th:href="@{/database}">数据库存储</a></li>
+    <li role="presentation" class="active"><a th:href="@{/scatter}">绘制散点图</a></li>
+    <li role="presentation"><a th:href="@{/order}">数据排序</a></li>
+    <li role="presentation"><a th:href="@{/answer}">算法求解</a></li>
+</ul>
+<div class="container">
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <form th:action="@{/scatter/query}" method="post">
+                <div class="form-group">
+                    <label>输入文件名：</label>
+                    <input type="text" name="fileName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>输入组数：</label>
+                    <input type="text" name="group" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="提交" class="btn btn-info">
+                </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="main" style="width: 100%;height:550px;"></div>
+            <script type="text/javascript"  th:inline="javascript">
+                // 基于准备好的dom，初始化echarts实例
+                const myChart = echarts.init(document.getElementById('main'));
+                const data=[[${data}]];
+                // 指定图表的配置项和数据
+                const option = {
+                    xAxis: {},
+                    yAxis: {},
+                    series: [{
+                        symbolSize: 20,
+                        data: data,
+                        type: 'scatter'
+                    }]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            </script>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
